@@ -41,15 +41,15 @@ fn main() {
             let my = value.next().unwrap().parse::<Hand>().unwrap();
 
             match (adv, my) {
-                (Hand::A, Hand::X) => points += 0 + 3,
-                (Hand::A, Hand::Y) => points += 3 + 1,
-                (Hand::A, Hand::Z) => points += 6 + 2,
+                (Hand::A, Hand::X) => points += 3 + 1,
+                (Hand::A, Hand::Y) => points += 6 + 2,
+                (Hand::A, Hand::Z) => points += 0 + 3,
                 (Hand::B, Hand::X) => points += 0 + 1,
                 (Hand::B, Hand::Y) => points += 3 + 2,
                 (Hand::B, Hand::Z) => points += 6 + 3,
-                (Hand::C, Hand::X) => points += 0 + 2,
-                (Hand::C, Hand::Y) => points += 3 + 3,
-                (Hand::C, Hand::Z) => points += 6 + 1,
+                (Hand::C, Hand::X) => points += 6 + 1,
+                (Hand::C, Hand::Y) => points += 0 + 2,
+                (Hand::C, Hand::Z) => points += 3 + 3,
                 _ => {}
             }
         }
