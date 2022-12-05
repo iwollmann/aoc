@@ -9,16 +9,15 @@ fn main() {
     println!("Printing contents of: {:?}", filename);
 
     let mut points: u32 = 0;
-    if let Ok(mut lines) = read_lines(filename) {
-        while let (Some(h1), Some(h2), Some(h3)) = (lines.next(), lines.next(), lines.next()) {
-            let first: HashSet<u8> = HashSet::from_iter(h1.unwrap().as_bytes().iter().cloned());
-            let second: HashSet<u8> = HashSet::from_iter(h2.unwrap().as_bytes().iter().cloned());
-            let third: HashSet<u8> = HashSet::from_iter(h3.unwrap().as_bytes().iter().cloned());
+    if let Ok(lines) = read_lines(filename) {
+        for mut line in lines.flatten() {
+            let size = line.len();
+            let (h1, h2) = line.split_at_mut(size / 2);
+            let first: HashSet<u8> = HashSet::from_iter(h1.as_bytes().iter().cloned());
+            let second: HashSet<u8> = HashSet::from_iter(h2.as_bytes().iter().cloned());
 
-            // println!("Passing here: {:?} ", first,);
             second.iter().for_each(|item| {
-                // println!("passing inside map: {:?} {:?}", item, points);
-                if first.contains(item) && third.contains(item) {
+                if first.contains(item) {
                     match item {
                         x if x <= &b'Z' => points += (x - b'A' + 1 + 26) as u32,
                         x if x >= &b'a' => points += (x - b'a' + 1) as u32,
