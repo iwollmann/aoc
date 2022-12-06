@@ -1,3 +1,4 @@
+use std::collections::HashSet;
 use std::env;
 use std::fs::File;
 use std::io::{self, BufRead};
@@ -18,7 +19,7 @@ fn main() {
             let (a1, a2) = (pair1[0], pair1[1]);
             let (b1, b2) = (pair2[0], pair2[1]);
 
-            if (a2 <= b2 && a2 >= b1) || (b2 <= a2 && b2 >= a1) {
+            if (a1 >= b1 && a2 <= b2) || (b1 >= a1 && b2 <= a2) {
                 count += 1;
             }
         }
