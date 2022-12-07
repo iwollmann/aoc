@@ -1,3 +1,4 @@
+use core::num;
 use std::collections::VecDeque;
 use std::env;
 use std::fs::File;
@@ -15,14 +16,13 @@ fn main() {
             a if a[..2] == *" 1" => (),
             a if a[..4] == *"move" => {
                 let nums: Vec<usize> = a.split(' ').flat_map(|f| f.parse::<usize>()).collect();
+                println!("Movement: {:?} {:?}", stacks, nums);
 
-                let drained = stacks[nums[1] - 1]
-                    .drain(0..nums[0])
-                    .collect::<VecDeque<_>>();
-                for d in drained.iter().rev() {
-                    stacks[nums[2] - 1].push_front(*d);
+                for _ in 0..nums[0] {
+                    if let Some(val) = stacks[nums[1] - 1].pop_front() {
+                        stacks[nums[2] - 1].push_front(val)
+                    }
                 }
-                // println!("Movement: {:?} {:?} {:?}", stacks, nums, drained);
             }
             a => {
                 let a: Vec<char> = a.chars().collect();
